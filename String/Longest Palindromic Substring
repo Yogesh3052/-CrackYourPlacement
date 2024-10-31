@@ -1,0 +1,37 @@
+class Solution {
+    public boolean palindrome(String s){
+        int start=0;
+        int end=s.length()-1;
+        while(start<end){
+            if(s.charAt(start)==s.charAt(end)){
+                start++;
+                end--;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+    public String longestPalindrome(String s) {
+        if(s.isEmpty() ||s.isBlank() || s.length()==1){
+            
+            return s;
+        }
+        
+        int n=s.length();
+        HashMap <Integer,String> set=new HashMap<>();
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<=n;j++){
+                String sub=s.substring(i,j);
+                boolean palindrome=palindrome(sub);
+                if(palindrome==true){
+                    set.put(sub.length(),sub);
+
+                }
+            }
+        }
+        String res=set.get(Collections.max(set.keySet()));
+        return res;
+    }
+}
